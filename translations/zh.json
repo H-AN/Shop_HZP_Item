@@ -1,5 +1,5 @@
 {
-  "shop.prefix": "[商店]",
+  "shop.prefix": "[gold]★[red] [商店][default]",
   "item.t_virus_serum.name": "T病毒血清",
   "item.t_virus_reagent.name": "T病毒试剂",
   "item.infection_grenade.name": "感染手雷",
