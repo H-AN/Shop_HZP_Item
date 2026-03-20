@@ -207,39 +207,104 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                 switch (itemData.ItemId.ToLower())
                 {
                     case "t_virus_serum":
+                        if (!_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_zombie_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_SetTargetTVaccine(player);
                         break;
                     case "t_virus_reagent":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_is_zombie"]);
+                            return;
+                        }
                         _zpApi.HZP_SetTargetZombie(player);
                         break;
                     case "infection_grenade":
+                        if (!_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_zombie_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveTVirusGrenade(player);
                         break;
                     case "scba_suit":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
+                        if (_zpApi.HZP_PlayerHaveScbaSuit(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_have_scba_suit"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveScbaSuit(player);
                         break;
                     case "god_mode":
+                        if (_zpApi.HZP_PlayerHaveGodState(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_have_god_mode"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveGodState(player, runtimeSettings.GodModeDuration);
                         break;
                     case "add_health":
                         _zpApi.HZP_HumanAddHealth(player, itemData.HealthAmount);
                         break;
                     case "infinite_ammo":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
+                        if (_zpApi.HZP_PlayerHaveInfiniteAmmoState(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_have_infinite_ammo"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveInfiniteAmmo(player, runtimeSettings.InfiniteAmmoDuration);
                         break;
                     case "fire_grenade":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveFireGrenade(player);
                         break;
                     case "light_grenade":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveLightGrenade(player);
                         break;
                     case "freeze_grenade":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveFreezeGrenade(player);
                         break;
                     case "teleport_grenade":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveTeleportGrenade(player);
                         break;
                     case "incendiary_grenade":
+                        if (_zpApi.HZP_IsZombie(player.PlayerID))
+                        {
+                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            return;
+                        }
                         _zpApi.HZP_GiveIncGrenade(player);
                         break;
                     default:
@@ -319,16 +384,11 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
         if (!string.IsNullOrWhiteSpace(itemTemplate.DisplayNameKey))
         {
             var key = itemTemplate.DisplayNameKey.Trim();
-            try
+            
+            var localized = Core.Localizer[key];
+            if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
             {
-                var localized = Core.Localizer[key];
-                if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
-                {
-                    return localized;
-                }
-            }
-            catch
-            {
+                return localized;
             }
         }
 

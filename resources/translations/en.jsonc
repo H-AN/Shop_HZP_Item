@@ -11,5 +11,11 @@
   "item.light_grenade.name": "Light Grenade",
   "item.freeze_grenade.name": "Freeze Grenade",
   "item.teleport_grenade.name": "Teleport Grenade",
-  "item.incendiary_grenade.name": "Incendiary Grenade"
+  "item.incendiary_grenade.name": "Incendiary Grenade",
+  "player.already_have_scba_suit": "You already have the SCBA suit!",
+  "player.already_have_god_mode": "You already have God Mode!",
+  "player.already_have_infinite_ammo": "You already have Infinite Ammo!",
+  "player.already_is_zombie": "You are already a zombie!",
+  "player.only_zombie_can_buy": "Only zombies can buy this!",
+  "player.only_human_can_buy": "Only humans can buy this!"
 }

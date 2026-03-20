@@ -11,5 +11,11 @@
   "item.light_grenade.name": "照明手雷",
   "item.freeze_grenade.name": "冰冻手雷",
   "item.teleport_grenade.name": "传送手雷",
-  "item.incendiary_grenade.name": "燃烧手雷"
+  "item.incendiary_grenade.name": "燃烧手雷",
+  "player.already_have_scba_suit": "你已经拥有防化服了！",
+  "player.already_have_god_mode": "你已经拥有无敌模式了！",
+  "player.already_have_infinite_ammo": "你已经拥有无限子弹了！",
+  "player.already_is_zombie": "你已经是丧尸了！",
+  "player.only_zombie_can_buy": "只有丧尸能够购买！",
+  "player.only_human_can_buy": "只有人类能够购买！"
 }
