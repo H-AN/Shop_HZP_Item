@@ -1,0 +1,15 @@
+{
+  "shop.prefix": "[商店]",
+  "item.t_virus_serum.name": "T病毒血清",
+  "item.t_virus_reagent.name": "T病毒试剂",
+  "item.infection_grenade.name": "感染手雷",
+  "item.scba_suit.name": "防化服",
+  "item.god_mode.name": "无敌模式",
+  "item.add_health.name": "增加生命值",
+  "item.infinite_ammo.name": "无限子弹",
+  "item.fire_grenade.name": "火焰手雷",
+  "item.light_grenade.name": "照明手雷",
+  "item.freeze_grenade.name": "冰冻手雷",
+  "item.teleport_grenade.name": "传送手雷",
+  "item.incendiary_grenade.name": "燃烧手雷"
+}

@@ -1,0 +1,15 @@
+{
+  "shop.prefix": "[Shop]",
+  "item.t_virus_serum.name": "T-Virus Serum",
+  "item.t_virus_reagent.name": "T-Virus Reagent",
+  "item.infection_grenade.name": "Infection Grenade",
+  "item.scba_suit.name": "SCBA Suit",
+  "item.god_mode.name": "God Mode",
+  "item.add_health.name": "Add Health",
+  "item.infinite_ammo.name": "Infinite Ammo",
+  "item.fire_grenade.name": "Fire Grenade",
+  "item.light_grenade.name": "Light Grenade",
+  "item.freeze_grenade.name": "Freeze Grenade",
+  "item.teleport_grenade.name": "Teleport Grenade",
+  "item.incendiary_grenade.name": "Incendiary Grenade"
+}

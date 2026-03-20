@@ -1,0 +1,147 @@
+{
+  "ShopHZPItemCFG": {
+    "Settings": {
+      "UseCorePrefix": true,
+      "Category": "Zombie Items",
+      "GodModeDuration": 20,
+      "InfiniteAmmoDuration": 20
+    },
+    "Items": [
+      {
+        "Id": "t_virus_serum",
+        "DisplayName": "T-Virus Serum",
+        "DisplayNameKey": "item.t_virus_serum.name",
+        "Price": 500,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "T",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "t_virus_reagent",
+        "DisplayName": "T-Virus Reagent",
+        "DisplayNameKey": "item.t_virus_reagent.name",
+        "Price": 800,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "infection_grenade",
+        "DisplayName": "Infection Grenade",
+        "DisplayNameKey": "item.infection_grenade.name",
+        "Price": 800,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "T",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "scba_suit",
+        "DisplayName": "SCBA Suit",
+        "DisplayNameKey": "item.scba_suit.name",
+        "Price": 600,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "god_mode",
+        "DisplayName": "God Mode",
+        "DisplayNameKey": "item.god_mode.name",
+        "Price": 1000,
+        "SellPrice": null,
+        "DurationSeconds": 20,
+        "Type": "Temporary",
+        "Team": "Any",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "add_health",
+        "DisplayName": "Add Health",
+        "DisplayNameKey": "item.add_health.name",
+        "Price": 300,
+        "SellPrice": null,
+        "HealthAmount": 200,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "infinite_ammo",
+        "DisplayName": "Infinite Ammo",
+        "DisplayNameKey": "item.infinite_ammo.name",
+        "Price": 900,
+        "SellPrice": null,
+        "DurationSeconds": 20,
+        "Type": "Temporary",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "fire_grenade",
+        "DisplayName": "Fire Grenade",
+        "DisplayNameKey": "item.fire_grenade.name",
+        "Price": 800,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "light_grenade",
+        "DisplayName": "Light Grenade",
+        "DisplayNameKey": "item.light_grenade.name",
+        "Price": 500,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "freeze_grenade",
+        "DisplayName": "Freeze Grenade",
+        "DisplayNameKey": "item.freeze_grenade.name",
+        "Price": 700,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "teleport_grenade",
+        "DisplayName": "Teleport Grenade",
+        "DisplayNameKey": "item.teleport_grenade.name",
+        "Price": 1200,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      },
+      {
+        "Id": "incendiary_grenade",
+        "DisplayName": "Incendiary Grenade",
+        "DisplayNameKey": "item.incendiary_grenade.name",
+        "Price": 800,
+        "SellPrice": null,
+        "Type": "Consumable",
+        "Team": "CT",
+        "Enabled": true,
+        "CanBeSold": false
+      }
+    ]
+  }
+}
