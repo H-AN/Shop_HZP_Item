@@ -321,7 +321,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
             var key = itemTemplate.DisplayNameKey.Trim();
             try
             {
-                var localized = Core.Translation.GetPlayerLocalizer(default!)[key];
+                var localized = Core.Localizer[key];
                 if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
                 {
                     return localized;
