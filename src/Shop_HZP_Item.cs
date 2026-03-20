@@ -76,20 +76,10 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
     
     public override void Load(bool hotReload)
     {
-        Core.Configuration.InitializeJsonWithModel<ShopHZPItemCFG>("ShopHZPItemCFG.jsonc", "ShopHZPItemCFG").Configure(builder =>
-        {
-            builder.AddJsonFile("ShopHZPItemCFG.jsonc", false, true);
-        });
         var collection = new ServiceCollection();
         collection.AddSwiftly(Core);
 
-        collection
-            .AddOptionsWithValidateOnStart<ShopHZPItemCFG>()
-            .BindConfiguration("ShopHZPItemCFG");
-
         collection.AddSingleton<ShopHZPItemGlobals>();
-        collection.AddSingleton<ShopHZPItemEvents>();
-        collection.AddSingleton<ShopHZPItemService>();
 
         ServiceProvider = collection.BuildServiceProvider();
     }
@@ -331,7 +321,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
             var key = itemTemplate.DisplayNameKey.Trim();
             try
             {
-                var localized = Core.Localizer[key];
+                var localized = Core.Translation.GetPlayerLocalizer(default!)[key];
                 if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
                 {
                     return localized;
