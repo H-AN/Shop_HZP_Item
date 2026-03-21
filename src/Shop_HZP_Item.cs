@@ -148,6 +148,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
         }
 
         _shopApi.OnItemPurchased += OnItemPurchased;
+        _shopApi.OnItemPreview += OnItemPreview;
         handlersRegistered = true;
 
         Core.Logger.LogInformation(
@@ -162,6 +163,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
         if (!handlersRegistered || _shopApi is null) return;
 
         _shopApi.OnItemPurchased -= OnItemPurchased;
+        _shopApi.OnItemPreview -= OnItemPreview;
         
         foreach (var itemId in registeredItemIds)
         {
@@ -188,6 +190,17 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
         GiveZombieItem(player, itemData);
     }
 
+    private void OnItemPreview(IPlayer player, ShopItemDefinition item)
+    {
+        if (!registeredItemIds.Contains(item.Id))
+        {
+            return;
+        }
+
+        var displayName = _shopApi?.GetItemDisplayName(player, item) ?? item.DisplayName;
+        player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["preview.cannot_preview"]);
+    }
+
     private void GiveZombieItem(IPlayer player, ZombieItemData itemData)
     {
         if (_zpApi is null || !player.IsValid || !player.IsAlive)
@@ -209,7 +222,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "t_virus_serum":
                         if (!_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_zombie_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_zombie_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_SetTargetTVaccine(player);
@@ -217,7 +230,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "t_virus_reagent":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_is_zombie"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.already_is_zombie"]);
                             return;
                         }
                         _zpApi.HZP_SetTargetZombie(player);
@@ -225,7 +238,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "infection_grenade":
                         if (!_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_zombie_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_zombie_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_GiveTVirusGrenade(player);
@@ -233,12 +246,12 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "scba_suit":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         if (_zpApi.HZP_PlayerHaveScbaSuit(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_have_scba_suit"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.already_have_scba_suit"]);
                             return;
                         }
                         _zpApi.HZP_GiveScbaSuit(player);
@@ -246,7 +259,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "god_mode":
                         if (_zpApi.HZP_PlayerHaveGodState(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_have_god_mode"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.already_have_god_mode"]);
                             return;
                         }
                         _zpApi.HZP_GiveGodState(player, runtimeSettings.GodModeDuration);
@@ -257,12 +270,12 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "infinite_ammo":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         if (_zpApi.HZP_PlayerHaveInfiniteAmmoState(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.already_have_infinite_ammo"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.already_have_infinite_ammo"]);
                             return;
                         }
                         _zpApi.HZP_GiveInfiniteAmmo(player, runtimeSettings.InfiniteAmmoDuration);
@@ -270,7 +283,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "fire_grenade":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_GiveFireGrenade(player);
@@ -278,7 +291,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "light_grenade":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_GiveLightGrenade(player);
@@ -286,7 +299,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "freeze_grenade":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_GiveFreezeGrenade(player);
@@ -294,7 +307,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "teleport_grenade":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_GiveTeleportGrenade(player);
@@ -302,7 +315,7 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
                     case "incendiary_grenade":
                         if (_zpApi.HZP_IsZombie(player.PlayerID))
                         {
-                            player.SendMessage(MessageType.Chat, Core.Localizer["player.only_human_can_buy"]);
+                            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["player.only_human_can_buy"]);
                             return;
                         }
                         _zpApi.HZP_GiveIncGrenade(player);
@@ -379,13 +392,14 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
         return true;
     }
 
-    private string ResolveDisplayName(ZombieItemTemplate itemTemplate)
+    private string ResolveDisplayName(ZombieItemTemplate itemTemplate, IPlayer? player = null)
     {
         if (!string.IsNullOrWhiteSpace(itemTemplate.DisplayNameKey))
         {
             var key = itemTemplate.DisplayNameKey.Trim();
             
-            var localized = Core.Localizer[key];
+            var localizer = player is null ? Core.Localizer : Core.Translation.GetPlayerLocalizer(player);
+            var localized = localizer[key];
             if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
             {
                 return localized;

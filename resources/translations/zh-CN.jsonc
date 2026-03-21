@@ -17,5 +17,8 @@
   "player.already_have_infinite_ammo": "你已经拥有无限子弹了！",
   "player.already_is_zombie": "你已经是丧尸了！",
   "player.only_zombie_can_buy": "只有丧尸能够购买！",
-  "player.only_human_can_buy": "只有人类能够购买！"
+  "player.only_human_can_buy": "只有人类能够购买！",
+  "preview.cannot_preview": "此道具无法预览",
+  "preview.instant": "[{0}] 立即生效",
+  "preview.roundstart": "[{0}] 从下一回合开始生效"
 }

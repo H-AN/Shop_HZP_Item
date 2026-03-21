@@ -17,5 +17,8 @@
   "player.already_have_infinite_ammo": "You already have Infinite Ammo!",
   "player.already_is_zombie": "You are already a zombie!",
   "player.only_zombie_can_buy": "Only zombies can buy this!",
-  "player.only_human_can_buy": "Only humans can buy this!"
+  "player.only_human_can_buy": "Only humans can buy this!",
+  "preview.cannot_preview": "This item cannot be previewed",
+  "preview.instant": "[{0}] Instant effect",
+  "preview.roundstart": "[{0}] Starts from next round"
 }
