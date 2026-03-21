@@ -197,8 +197,11 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
             return;
         }
 
-        var displayName = _shopApi?.GetItemDisplayName(player, item) ?? item.DisplayName;
-        player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["preview.cannot_preview"]);
+        Core.Scheduler.NextWorldUpdate(() =>
+        {
+            var displayName = _shopApi?.GetItemDisplayName(player, item) ?? item.DisplayName;
+            player.SendMessage(MessageType.Chat, Core.Translation.GetPlayerLocalizer(player)["preview.cannot_preview"]);
+        });
     }
 
     private void GiveZombieItem(IPlayer player, ZombieItemData itemData)
@@ -394,24 +397,45 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
 
     private string ResolveDisplayName(ZombieItemTemplate itemTemplate, IPlayer? player = null)
     {
+        Core.Logger.LogInformation(
+            "ResolveDisplayName called for item '{ItemId}'. DisplayNameKey='{DisplayNameKey}', DisplayName='{DisplayName}', Player={Player}",
+            itemTemplate.Id,
+            itemTemplate.DisplayNameKey,
+            itemTemplate.DisplayName,
+            player != null ? player.SteamID.ToString() : "null"
+        );
+
         if (!string.IsNullOrWhiteSpace(itemTemplate.DisplayNameKey))
         {
             var key = itemTemplate.DisplayNameKey.Trim();
             
             var localizer = player is null ? Core.Localizer : Core.Translation.GetPlayerLocalizer(player);
             var localized = localizer[key];
+            Core.Logger.LogInformation(
+                "Translation key '{Key}' resolved to '{Localized}'. IsEmptyOrWhiteSpace={IsEmptyOrWhiteSpace}, IsEqualToKey={IsEqualToKey}",
+                key,
+                localized,
+                string.IsNullOrEmpty(localized),
+                string.Equals(localized, key, StringComparison.Ordinal)
+            );
+
             if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
             {
+                Core.Logger.LogInformation("Using localized display name: '{Localized}'", localized);
                 return localized;
             }
         }
 
         if (!string.IsNullOrWhiteSpace(itemTemplate.DisplayName))
         {
-            return itemTemplate.DisplayName.Trim();
+            var displayName = itemTemplate.DisplayName.Trim();
+            Core.Logger.LogInformation("Using DisplayName: '{DisplayName}'", displayName);
+            return displayName;
         }
 
-        return itemTemplate.Id.Trim();
+        var id = itemTemplate.Id.Trim();
+        Core.Logger.LogInformation("Using ItemId as display name: '{Id}'", id);
+        return id;
     }
 
     private static void NormalizeConfig(ShopHZPItemCFG config)
