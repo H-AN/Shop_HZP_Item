@@ -18,7 +18,7 @@ namespace Shop_HZP_Item;
     Id = "Shop_HZP_Item",
     Name = "Shop HZP Item",
     Author = "H-AN",
-    Version = "1.0.0",
+    Version = "1.1.0",
     Description = "ShopCore module with HZP Items."
 )]
 
@@ -390,38 +390,23 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
             Type: itemType,
             Team: team,
             Enabled: itemTemplate.Enabled,
-            CanBeSold: itemTemplate.CanBeSold
+            CanBeSold: itemTemplate.CanBeSold,
+            DisplayNameResolver: player => ResolveDisplayName(itemTemplate, player)
         );
         return true;
     }
 
     private string ResolveDisplayName(ZombieItemTemplate itemTemplate, IPlayer? player = null)
     {
-        Core.Logger.LogInformation(
-            "ResolveDisplayName called for item '{ItemId}'. DisplayNameKey='{DisplayNameKey}', DisplayName='{DisplayName}', Player={Player}",
-            itemTemplate.Id,
-            itemTemplate.DisplayNameKey,
-            itemTemplate.DisplayName,
-            player != null ? player.SteamID.ToString() : "null"
-        );
-
         if (!string.IsNullOrWhiteSpace(itemTemplate.DisplayNameKey))
         {
             var key = itemTemplate.DisplayNameKey.Trim();
-            
+
             var localizer = player is null ? Core.Localizer : Core.Translation.GetPlayerLocalizer(player);
             var localized = localizer[key];
-            Core.Logger.LogInformation(
-                "Translation key '{Key}' resolved to '{Localized}'. IsEmptyOrWhiteSpace={IsEmptyOrWhiteSpace}, IsEqualToKey={IsEqualToKey}",
-                key,
-                localized,
-                string.IsNullOrEmpty(localized),
-                string.Equals(localized, key, StringComparison.Ordinal)
-            );
 
             if (!string.IsNullOrEmpty(localized) && !string.Equals(localized, key, StringComparison.Ordinal))
             {
-                Core.Logger.LogInformation("Using localized display name: '{Localized}'", localized);
                 return localized;
             }
         }
@@ -429,12 +414,10 @@ public class Shop_HZP_Item (ISwiftlyCore core) : BasePlugin(core)
         if (!string.IsNullOrWhiteSpace(itemTemplate.DisplayName))
         {
             var displayName = itemTemplate.DisplayName.Trim();
-            Core.Logger.LogInformation("Using DisplayName: '{DisplayName}'", displayName);
             return displayName;
         }
 
         var id = itemTemplate.Id.Trim();
-        Core.Logger.LogInformation("Using ItemId as display name: '{Id}'", id);
         return id;
     }
 
